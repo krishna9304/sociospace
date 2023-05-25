@@ -1,10 +1,14 @@
 import React from "react";
+import { AuthLayout } from "../../components/AuthLayout";
 
 interface FeedProps {}
-export const Feed: React.FC<FeedProps> = () => {
+
+const Feed: React.FC<FeedProps> = () => {
   return (
-    <div>
-      <h1>Feed</h1>
-    </div>
+    <AuthLayout>
+      <div></div>
+    </AuthLayout>
   );
 };
+
+export default Feed;
