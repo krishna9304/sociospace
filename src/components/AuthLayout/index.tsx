@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AuthHeader } from "../AuthHeader";
 import { SideNav } from "../SideNav";
+import { useCurrentUser } from "../../hooks/user";
+import { useNavigate } from "react-router-dom";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
 }
 
 export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
+  const { user } = useCurrentUser();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/");
+    }
+  }, [user]);
+
   return (
     <div className="w-screen h-screen">
       <div className="w-full min-h-[7%]">

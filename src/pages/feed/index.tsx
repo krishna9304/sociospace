@@ -6,7 +6,7 @@ interface FeedProps {}
 const Feed: React.FC<FeedProps> = () => {
   return (
     <AuthLayout>
-      <div></div>
+      <div className="w-full h-full"></div>
     </AuthLayout>
   );
 };

@@ -48,6 +48,14 @@ export const AuthForm: React.FC<AuthFormProps> = ({ authType }) => {
     setType(authType);
   }, [authType]);
 
+  const onSubmit = () => {
+    if (type === "register") {
+      console.log("register");
+    } else {
+      console.log("login");
+    }
+  };
+
   return (
     <Paper radius="md" withBorder={width >= 768 ? true : false} p="xl">
       <Text align="center" size="lg" weight={500}>
@@ -61,7 +69,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ authType }) => {
 
       <Divider label="Or continue with email" labelPosition="center" my="lg" />
 
-      <form onSubmit={form.onSubmit(() => {})}>
+      <form onSubmit={form.onSubmit(onSubmit)}>
         <Stack>
           {type === "register" && (
             <TextInput

@@ -1,6 +1,7 @@
 import { Title, Text, Button, Container } from "@mantine/core";
 import { useStyles } from "./styles";
 import { Dots } from "./Dots";
+import { Link } from "react-router-dom";
 
 export function LandingPageHero() {
   const { classes } = useStyles();
@@ -30,9 +31,11 @@ export function LandingPageHero() {
         </Container>
 
         <div className={classes.controls}>
-          <Button variant="gradient" className={classes.control} size="lg">
-            Create a new account
-          </Button>
+          <Link to="/auth/register">
+            <Button variant="gradient" className={classes.control} size="lg">
+              Create a new account
+            </Button>
+          </Link>
         </div>
       </div>
     </Container>
