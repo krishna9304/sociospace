@@ -43,7 +43,6 @@ export const useStyles = createStyles((theme) => ({
 
     [theme.fn.smallerThan("xs")]: {
       fontSize: rem(28),
-      textAlign: "left",
     },
   },
 
@@ -56,7 +55,6 @@ export const useStyles = createStyles((theme) => ({
     textAlign: "center",
 
     [theme.fn.smallerThan("xs")]: {
-      textAlign: "left",
       fontSize: theme.fontSizes.md,
     },
   },
@@ -66,9 +64,7 @@ export const useStyles = createStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
 
-    [theme.fn.smallerThan("xs")]: {
-      flexDirection: "column",
-    },
+    [theme.fn.smallerThan("xs")]: {},
   },
 
   control: {

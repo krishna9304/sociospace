@@ -23,6 +23,9 @@ import {
 import { useStyles } from "./styles";
 import { SocioSpaceLogo } from "../Logo";
 import { ToggleDarkMode } from "../ToggleDarkMode";
+import api from "../../api/api";
+import { toast } from "react-hot-toast";
+import { useCurrentUser } from "../../hooks/user";
 
 interface AuthHeaderProps {
   user?: { name: string; image: string };
@@ -38,6 +41,18 @@ const user = {
 export const AuthHeader: React.FC<AuthHeaderProps> = () => {
   const { classes, theme, cx } = useStyles();
   const [userMenuOpened, setUserMenuOpened] = useState(false);
+
+  const { setUser } = useCurrentUser();
+
+  const logout = async () => {
+    try {
+      await api.deleteCurrentSession();
+      setUser(null);
+      toast("Logged out", { icon: "👋" });
+    } catch (error) {
+      toast("Failed to logout", { icon: "❌" });
+    }
+  };
 
   return (
     <div className={classes.header}>
@@ -128,7 +143,10 @@ export const AuthHeader: React.FC<AuthHeaderProps> = () => {
                 >
                   Change account
                 </Menu.Item>
-                <Menu.Item icon={<IconLogout size="0.9rem" stroke={1.5} />}>
+                <Menu.Item
+                  onClick={logout}
+                  icon={<IconLogout size="0.9rem" stroke={1.5} />}
+                >
                   Logout
                 </Menu.Item>
                 <Menu.Divider />

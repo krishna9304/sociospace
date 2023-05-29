@@ -4,8 +4,11 @@ import {
   ColorSchemeProvider,
   MantineProvider,
 } from "@mantine/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import api from "./api/api";
+import { useCurrentUser } from "./hooks/user";
 
 const pages: any = import.meta.glob("./pages/**/*.tsx", {
   eager: true,
@@ -42,6 +45,19 @@ const router = createBrowserRouter(
 function App() {
   const [colorScheme, setColorScheme] = useState<ColorScheme>("dark");
 
+  const { setUser } = useCurrentUser();
+
+  const fetchUser = async () => {
+    try {
+      const data = await api.getAccount();
+      setUser({ ...data });
+      toast("Logged in", { icon: "✅" });
+    } catch (error) {}
+  };
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
   return (
     <MantineProvider
       theme={{
@@ -59,6 +75,7 @@ function App() {
         }
       >
         <RouterProvider router={router} />
+        <Toaster />
       </ColorSchemeProvider>
     </MantineProvider>
   );

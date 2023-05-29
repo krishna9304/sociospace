@@ -15,6 +15,9 @@ import {
 import { GoogleButton, TwitterButton } from "../SocialButtons/SocialButtons";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../../api/api";
+import { toast } from "react-hot-toast";
+import { useCurrentUser } from "../../hooks/user";
 
 interface AuthFormProps {
   authType: string;
@@ -43,16 +46,40 @@ export const AuthForm: React.FC<AuthFormProps> = ({ authType }) => {
 
   const { width } = useViewportSize();
   const navigate = useNavigate();
+  const { setUser } = useCurrentUser();
 
   useEffect(() => {
     setType(authType);
   }, [authType]);
 
-  const onSubmit = () => {
-    if (type === "register") {
-      console.log("register");
-    } else {
-      console.log("login");
+  const onSubmit = async () => {
+    const { email, password, name } = form.values;
+    try {
+      if (type === "register") {
+        if (form.values.terms) {
+          const user = await api.createAccount(email, password, name);
+          await api.createSession(email, password);
+          toast("Signup success. User logged in.", {
+            icon: "✅",
+          });
+          setUser({ ...user });
+        } else {
+          toast("You must accept the terms and conditions", {
+            icon: "❌",
+          });
+        }
+      } else {
+        await api.createSession(email, password);
+        const data = await api.getAccount();
+        setUser({ ...data });
+        toast("Login success", {
+          icon: "✅",
+        });
+      }
+    } catch (error) {
+      toast(error.message, {
+        icon: "❌",
+      });
     }
   };
 

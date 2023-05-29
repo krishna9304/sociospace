@@ -226,10 +226,12 @@ export function LandingPageHeader() {
 
           <Group position="center" grow pb="xl" px="md">
             <Link to={"/auth/login"}>
-              <Button variant="default">Log in</Button>
+              <Button className="w-full" variant="default">
+                Log in
+              </Button>
             </Link>
             <Link to={"/auth/register"}>
-              <Button>Register</Button>
+              <Button className="w-full">Register</Button>
             </Link>
           </Group>
         </ScrollArea>
