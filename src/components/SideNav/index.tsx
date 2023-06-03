@@ -1,7 +1,6 @@
 import {
   Navbar,
   TextInput,
-  Code,
   UnstyledButton,
   Badge,
   Text,
@@ -10,20 +9,10 @@ import {
   Tooltip,
   rem,
 } from "@mantine/core";
-import {
-  IconBulb,
-  IconUser,
-  IconCheckbox,
-  IconSearch,
-  IconPlus,
-} from "@tabler/icons-react";
+import { IconSearch, IconPlus, IconMessage } from "@tabler/icons-react";
 import { useStyles } from "./styles";
 
-const links = [
-  { icon: IconBulb, label: "Activity", notifications: 3 },
-  { icon: IconCheckbox, label: "Tasks", notifications: 4 },
-  { icon: IconUser, label: "Contacts" },
-];
+const links = [{ icon: IconMessage, label: "Messages", notifications: 3 }];
 
 const collections = [
   { emoji: "👍", label: "Sales" },
@@ -71,12 +60,9 @@ export function SideNav() {
   return (
     <Navbar p="md" className={classes.navbar}>
       <TextInput
-        placeholder="Search"
+        placeholder="Search for friends"
         size="xs"
         icon={<IconSearch size="0.8rem" stroke={1.5} />}
-        rightSectionWidth={70}
-        rightSection={<Code className={classes.searchCode}>Ctrl + K</Code>}
-        styles={{ rightSection: { pointerEvents: "none" } }}
         mb="sm"
       />
 
@@ -87,7 +73,7 @@ export function SideNav() {
       <Navbar.Section className={classes.section}>
         <Group className={classes.collectionsHeader} position="apart">
           <Text size="xs" weight={500} color="dimmed">
-            Collections
+            Groups
           </Text>
           <Tooltip label="Create collection" withArrow position="right">
             <ActionIcon variant="default" size={18}>

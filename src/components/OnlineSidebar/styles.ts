@@ -7,6 +7,7 @@ export const useStyles = createStyles((theme) => ({
     borderLeft: `${rem(1)} solid ${
       theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
     }`,
+    height: "100%",
   },
 
   title: {
