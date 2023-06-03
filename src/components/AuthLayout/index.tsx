@@ -3,6 +3,7 @@ import { AuthHeader } from "../AuthHeader";
 import { SideNav } from "../SideNav";
 import { useCurrentUser } from "../../hooks/user";
 import { useNavigate } from "react-router-dom";
+import { OnlineSideBar } from "../OnlineSidebar";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -27,7 +28,10 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
         <div className="hidden lg:block w-[18%] h-full">
           <SideNav />
         </div>
-        <div className="w-full lg:w-[82%] h-full">{children}</div>
+        <div className="w-full lg:w-[64%] h-full">{children}</div>
+        <div className="hidden lg:block w-[18%] h-full">
+          <OnlineSideBar />
+        </div>
       </div>
     </div>
   );
