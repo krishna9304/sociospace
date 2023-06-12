@@ -1,12 +1,12 @@
+require("dotenv").config();
 import express, { Application, NextFunction, Request, Response } from "express";
 import colors from "ansi-colors";
 import { Server } from "http";
 import mainRouter from "./routes";
-import bodyParser from "body-parser";
 import timeout from "connect-timeout";
 import cors from "cors";
 import morgan from "morgan";
-import { ISDEV, PORT } from "./contants";
+import { ISDEV, PORT } from "./constants";
 
 // Main Application
 const app: Application = express();
@@ -22,7 +22,7 @@ function haltOnTimedout(req: Request, res: Response, next: NextFunction) {
   if (!req.timedout) next();
 }
 
-app.get("/api/v1", (req: Request, res: Response, next: NextFunction) => {
+app.get("/", (_: Request, res: Response, __: NextFunction) => {
   res.json({
     message: "Server running!",
     data: null,

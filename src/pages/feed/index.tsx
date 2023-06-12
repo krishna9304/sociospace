@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { AuthLayout } from "../../components/AuthLayout";
 import { Divider, Textarea } from "@mantine/core";
 import { DropzoneButton } from "../../components/DropzoneButton";
@@ -6,7 +6,6 @@ import { DropzoneButton } from "../../components/DropzoneButton";
 interface FeedProps {}
 
 const Feed: React.FC<FeedProps> = () => {
-  useEffect(() => {}, []);
   return (
     <AuthLayout>
       <div className="w-full h-full p-3 flex flex-col items-center">
